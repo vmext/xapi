@@ -3,7 +3,7 @@ import api from "./api";
 
 const app = new Koa();
 
-app.use(api.routes()).use(api.allowedMethods);
+app.use(api.routes()).use(api.allowedMethods());
 /* app.use(async (ctx) => {
   console.info("zip=------------")
   let data = zip.encode(ctx.body);
