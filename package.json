@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/koa": "^3.0.0",
     "@vercel/node": "^5.3.11",
     "koa": "^3.0.1",
-    "@types/koa": "^3.0.0",
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {

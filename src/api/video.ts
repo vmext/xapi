@@ -13,7 +13,7 @@ routerVideo.get("/s", async (ctx) => {
   for (let i in ret.results) {
     let item = ret.results[i];
     let episodesx = item.episodes || [];
-
+    episodesx = handleResources(episodesx);
     list.push({
       id: item.id,
       title: item.title,
@@ -42,5 +42,18 @@ routerVideo.get("/s", async (ctx) => {
   };
 });
 routerVideo.get("/d", (ctx) => {});
+
+function handleResources(urls: Array<String>): Array<String> {
+/*   let map = new Map();
+  for (let i = 0; i < urls.length; i++) {
+    //urls[i] = handleResourceURL(urls[i]);
+    let url = urls[i];
+    let info = new URL(url);
+    map.set(info.host, url);
+  }
+  let list: Array<String> = [];
+  map.forEach((value: String, key: String) => list.push(value)); */
+  return urls;
+}
 
 export default routerVideo;
