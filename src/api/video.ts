@@ -39,7 +39,6 @@ routerVideo.get("/list", async (ctx) => {
   }
   output.data = {
     list: list,
-    count: list.length,
   };
   ctx.body = output;
 });
