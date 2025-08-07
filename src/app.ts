@@ -1,18 +1,9 @@
-import Koa from 'koa'
-import Router from '@koa/router'
+import Koa from "koa";
+import api from "./api"
 
-const app = new Koa()
-const router = new Router()
+const app = new Koa();
 
-router.get('/', ctx => {
-  ctx.body = { message: 'Hello from Koa Serverless' }
-})
 
-router.get('/ping', ctx => {
-  ctx.body = { message: 'pong' }
-})
+app.use(api.routes()).use(api.allowedMethods);
 
-app.use(router.routes())
-app.use(router.allowedMethods())
-
-export default app
+export default app;
