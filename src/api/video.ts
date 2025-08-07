@@ -21,8 +21,27 @@ routerVideo.get("/home", async (ctx) => {
 
   ctx.body = outout;
 });
-routerVideo.get("/list", (ctx) => {
-
+routerVideo.get("/list", async (ctx) => {
+  let output: any = { code: 200 };
+  let list: Array<Media> = [];
+  let type = (ctx.query.type as string) || "tv";
+  let start = parseInt(ctx.query.start as string) || 0;
+  switch (type) {
+    case "movie":
+      list = await getMovies(start);
+      break;
+    case "show":
+      list = await getShows(start);
+      break;
+    default:
+      list = await getTVs(start);
+      break;
+  }
+  output.data = {
+    list: list,
+    count: list.length,
+  };
+  ctx.body = output;
 });
 routerVideo.get("/s", async (ctx) => {
   let s = (ctx.query.q || "") as string;
