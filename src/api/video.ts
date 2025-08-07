@@ -43,8 +43,9 @@ routerVideo.get("/list", async (ctx) => {
   ctx.body = output;
 });
 routerVideo.get("/s", async (ctx) => {
-  let s = (ctx.query.q || "") as string;
-  let list = await search(s);
+  let q = (ctx.query.q || "") as string;
+  console.info("search xx", q); 
+  let list = await search(q);
   ctx.body = {
     code: 200,
     data: {

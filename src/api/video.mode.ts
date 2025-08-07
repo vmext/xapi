@@ -7,7 +7,7 @@ export type Media = {
 };
 export async function getMovies(start: number = 0): Promise<Array<Media>> {
   let res = await fetch(
-    `https://moon-tv-sand-five-73.vercel.app/api/douban/categories?kind=movie&category=热门&type=全部&limit=20&start=${start}`
+    `https://xtv.gorap.vip/api/douban/categories?kind=movie&category=热门&type=全部&limit=20&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -27,7 +27,7 @@ export async function getMovies(start: number = 0): Promise<Array<Media>> {
 
 export async function getTVs(start: number = 0): Promise<Array<Media>> {
   let res = await fetch(
-    `https://moon-tv-sand-five-73.vercel.app/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
+    `https://xtv.gorap.vip/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -48,7 +48,7 @@ export async function getTVs(start: number = 0): Promise<Array<Media>> {
 export async function getShows(start: number = 0): Promise<Array<Media>> {
   start = start || 0;
   let res = await fetch(
-    `https://moon-tv-sand-five-73.vercel.app/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
+    `https://xtv.gorap.vip/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -83,26 +83,29 @@ type Detail = {
   sourceName: string;
   episodes: Array<any>;
 };
-export async function search(s: string): Promise<Array<Detail>> {
-  let ret: any =await fetch("https://moon-tv-sand-five-73.vercel.app/api/search?q=" + encodeURIComponent(s));
+export async function search(q: string): Promise<Array<Detail>> {
+  let ret: any = await fetch("https://xtv.gorap.vip/api/search?q=" + encodeURIComponent(q));
   let data = await ret.json().catch(() => ({ results: [] }));
   let list: Detail[] = [];
-  for (let i in data.results) {
-    let item = ret.results[i];
-    let episodesx = item.episodes || [];
-    list.push({
-      id: item.id,
-      title: item.title,
-      poster: item.poster,
-      year: item.year,
-      class: item.class,
-      rate: item.rate,
-      typeName: item.type_name,
-      doubanId: item.doubanId,
-      source: item.source,
-      sourceName: item.source_name,
-      episodes: episodesx,
+  list = data.results
+    .filter((item: any) => item.episodes && item.episodes.length > 0)
+    .map((item: any) => {
+      let episodesx = item.episodes || [];
+      return { 
+        id: item.id,
+        title: item.title,
+        poster: item.poster,
+        year: item.year,
+        class: item.class,  
+        //rate: item.rate,
+        typeName: item.type_name,
+        doubanId: item.doubanId,
+        source: item.source,
+        sourceName: item.source_name,
+        episodes: episodesx,
+        //douban_id: item.douban_id,
+      };
     });
-  }
+
   return list;
 }
