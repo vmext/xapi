@@ -1,5 +1,5 @@
 import Router from "@koa/router";
-import { Media, getMovies, getTVs, getShows, recAnimes } from "./video.mode";
+import { Media, getMovies, getTVs, getShows, recAnimes, search } from "./video.mode";
 const routerVideo = new Router();
 
 //首页
@@ -44,34 +44,7 @@ routerVideo.get("/list", async (ctx) => {
 });
 routerVideo.get("/s", async (ctx) => {
   let s = (ctx.query.q || "") as string;
-  let ret: any = await (await fetch("https://xtv.gorap.vip/api/search?q=" + encodeURIComponent(s)))
-    .json()
-    .catch((err) => ({ results: [] }));
-  let list: any[] = [];
-  for (let i in ret.results) {
-    let item = ret.results[i];
-    let episodesx = item.episodes || [];
-    episodesx = handleResources(episodesx);
-    list.push({
-      id: item.id,
-      title: item.title,
-      poster: item.poster,
-      year: item.year,
-      class: item.class,
-      typeName: item.type_name,
-      doubanId: item.doubanId,
-      source: item.source,
-      sourceName: item.source_name,
-      episodes: episodesx,
-    });
-  }
-  let output = {
-    code: 200,
-    data: {
-      list: [],
-      count: 0,
-    },
-  };
+  let list = await search(s);
   ctx.body = {
     code: 200,
     data: {
