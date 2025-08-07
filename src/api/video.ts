@@ -20,10 +20,10 @@ routerVideo.get("/s", async (ctx) => {
       poster: item.poster,
       year: item.year,
       class: item.class,
-      typeName: item.typeName,
+      typeName: item.type_name,
       doubanId: item.doubanId,
       source: item.source,
-      sourceName: item.sourceName,
+      sourceName: item.source_name,
       episodes: episodesx,
     });
   }
