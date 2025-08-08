@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup src/index.ts --format cjs",
+    "dev": "cross-env NODE_ENV=development tsup src/index.ts --format cjs",
     "devxxx": "tsup src/index.ts --format cjs --target node18 --dts --watch --onSuccess \"node dist/index.cjs\"",
     "start": "node dist/index.cjs"
   },
