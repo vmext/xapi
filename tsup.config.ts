@@ -30,7 +30,7 @@ configs.push({
   // Vercel Serverless 入口
   entry: ["serverless/vercel.ts"],
   outDir: "dist/vercel",
-  format: "esm", // Vercel 推荐 ESM //esm
+  format: "cjs", // Vercel 推荐 ESM //esm
   target: "node18",
   platform: "node",
   sourcemap: true,

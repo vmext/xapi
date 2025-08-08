@@ -4,14 +4,14 @@
   "buildCommand": "yarn build",
   "builds": [
     {
-      "src": "dist/vercel/vercel.js",
+      "src": "dist/vercel/vercel.cjs",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/vercel/vercel.js"
+      "dest": "dist/vercel/vercel.cjs"
     }
   ]
 }
