@@ -1,7 +1,6 @@
 {
   "version": 2,
   "installCommand": "yarn install && yarn build",
-  "buildCommandx": "yarn build",
   "builds": [
     {
       "src": "dist/vercel/vercel.cjs",
