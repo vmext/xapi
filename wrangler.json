@@ -1,4 +1,17 @@
 {
   "name": "xapi",
-  "main": "dist/cloudflare/cloudflare.js"
+  "type": "javascript",
+  "workers_dev": true,  
+  "compatibility_date": "2025-08-08",  
+  "build": {
+    "command": "yarn install && yarn build",  
+    "cwd": "./", 
+    "upload": {
+      "format": "modules",  
+      "dir": "dist/cloudflare",  
+      "main": "dist/cloudflare/cloudflare.js"  
+    }
+  },
+
+  "logpush": true 
 }
