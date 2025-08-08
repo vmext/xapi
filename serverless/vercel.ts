@@ -1,5 +1,5 @@
 //import type { VercelRequest, VercelResponse } from '@vercel/node'
-//import serverless from "serverless-http"
+import serverless from "serverless-http"
 import app from '../src/app'
 
 /* export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -8,5 +8,5 @@ import app from '../src/app'
     server.emit('request', req, res)
   })
 } */
-//export default serverless(app);
-export default app.callback(); 
+export default serverless(app);
+//export default app.callback(); 
