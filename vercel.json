@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "installCommand": "yarn install && yarn build",
-  "builds": [
-    {
-      "src": "dist/vercel/vercel.cjs",
-      "use": "@vercel/node"
-    }
-  ],
+  "installCommand": "yarn install",
+  "buildCommand": "yarn build",
+
   "routes": [
     {
       "src": "/(.*)",
