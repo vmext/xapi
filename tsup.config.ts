@@ -29,7 +29,7 @@ if (process.env.NODE_ENV == "development") {
     // Vercel Serverless 入口
     {
       entry: ["serverless/vercel.ts"],
-      outDir: "dist/less",
+      outDir: "dist/api",
       format: "esm", // Vercel 推荐 ESM
       target: "node18",
       platform: "node",
