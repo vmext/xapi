@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "serverless/vercel.ts",  // 你的入口文件路径
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "serverless/vercel.ts"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "serverless/vercel.ts"  // 可选：将所有路由指向 Koa
+      }
+    ]
+  }
