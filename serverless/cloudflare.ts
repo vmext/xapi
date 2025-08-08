@@ -7,7 +7,6 @@ export default {
       const server = createServer(app.callback())
       const { method, headers } = request
       const req = new Request(request.url, { method, headers })
-
       const res = {
         writeHead(status: number, headers: any) {
           this.status = status

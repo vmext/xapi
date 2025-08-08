@@ -1,0 +1,4 @@
+{
+  "name": "xapi",
+  "main": "dist/cloudflare/cloudflare.js"
+}
