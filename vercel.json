@@ -2,16 +2,11 @@
   "version": 2,
   "installCommand": "yarn install",
   "buildCommand": "yarn build",
-  "builds": [
-    {
-      "src": "dist/vercel/vercel.js",
-      "use": "@vercel/node"
-    }
-  ],
+  "outputDirectory": "dist/vercel",
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/vercel/vercel.js"
+      "dest": "vercel.js"
     }
   ]
 }
