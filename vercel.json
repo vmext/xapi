@@ -9,7 +9,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/vercel.js"  // 可选：将所有路由指向 Koa
+        "dest": "/dist/less/vercel.js"  // 可选：将所有路由指向 Koa
       }
     ]
   }
