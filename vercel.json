@@ -3,7 +3,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/api/vercel.js"
+      "dest": "dist/api/vercel.js"
     }
   ]
 }
