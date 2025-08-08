@@ -5,15 +5,6 @@
       "NODE_ENV": "production"
     }
   },
-  "builds": [
-    {
-      "src": "dist/api/vercel.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["serverless/**", "src/**"] // 可选：确保源码变化触发重新构建
-      }
-    }
-  ],
   "routes": [
     {
       "src": "/(.*)",
