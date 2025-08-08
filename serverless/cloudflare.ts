@@ -12,7 +12,7 @@ export default {
         writeHead(status: number, headers: any) {
           this.status = status
           this.headers = headers
-        },
+        },  
         end(body: string) {
           resolve(new Response(body, { status: this.status, headers: this.headers }))
         },
