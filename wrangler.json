@@ -1,6 +1,7 @@
 {
   "name": "xapi",
   "workers_dev": true,
+  "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2025-08-08",
   "main": "./dist/cloudflare/cloudflare.js",
   "rules": [{ "type": "ESModule", "globs": ["dist/cloudflare/*"] }],
