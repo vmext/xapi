@@ -10,18 +10,18 @@ export default defineConfig([
     splitting: false,
     sourcemap: true,
     clean: true,
-    watch: true,
+    watch: process.env.WATCH === '1',
     onSuccess: "node dist/node/index.cjs",
   },
   // Vercel Serverless 入口
   {
     entry: ["serverless/vercel.ts"],
-    outDir: "dist/serverless",
+    outDir: "dist/vercel",
     format: "esm", // Vercel 推荐 ESM
     target: "node18",
     platform: "node",
     sourcemap: true,
     splitting: false,
-    clean: false,
+    clean: true,
   },
 ]);
