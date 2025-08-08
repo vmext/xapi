@@ -2570,9 +2570,6 @@ var require_router = __commonJS({
   }
 });
 
-// serverless/vercel.ts
-import serverless from "serverless-http";
-
 // src/app.ts
 import Koa from "koa";
 
@@ -2740,11 +2737,9 @@ app.use(api_default.routes()).use(api_default.allowedMethods());
 var app_default = app;
 
 // serverless/vercel.ts
-var handler = serverless(app_default);
-var vercel_default = handler;
+var vercel_default = app_default.callback();
 export {
-  vercel_default as default,
-  handler
+  vercel_default as default
 };
 /*! Bundled license information:
 
