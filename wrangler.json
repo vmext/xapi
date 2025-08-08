@@ -1,9 +1,8 @@
 {
   "name": "xapi",
-  "type": "javascript",
   "workers_dev": true,
   "compatibility_date": "2025-08-08",
-  "main": "./dist/cloudflare/index.js",
+  "main": "./dist/cloudflare/cloudflare.js",
   "rules": [{ "type": "ESModule", "globs": ["dist/cloudflare/*"] }],
   "assets": {
     "directory": "./dist/cloudflare"
