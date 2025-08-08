@@ -1,11 +1,16 @@
-"use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __commonJS = (cb, mod) => function __require() {
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined") return require.apply(this, arguments);
+  throw Error('Dynamic require of "' + x + '" is not supported');
+});
+var __commonJS = (cb, mod) => function __require2() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __copyProps = (to, from, except, desc) => {
@@ -27,7 +32,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 
 // node_modules/.pnpm/ms@2.1.3/node_modules/ms/index.js
 var require_ms = __commonJS({
-  "node_modules/.pnpm/ms@2.1.3/node_modules/ms/index.js"(exports2, module2) {
+  "node_modules/.pnpm/ms@2.1.3/node_modules/ms/index.js"(exports, module) {
     "use strict";
     var s = 1e3;
     var m = s * 60;
@@ -35,7 +40,7 @@ var require_ms = __commonJS({
     var d = h * 24;
     var w = d * 7;
     var y = d * 365.25;
-    module2.exports = function(val, options) {
+    module.exports = function(val, options) {
       options = options || {};
       var type = typeof val;
       if (type === "string" && val.length > 0) {
@@ -144,7 +149,7 @@ var require_ms = __commonJS({
 
 // node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/common.js
 var require_common = __commonJS({
-  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/common.js"(exports2, module2) {
+  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/common.js"(exports, module) {
     "use strict";
     function setup(env) {
       createDebug.debug = createDebug;
@@ -316,20 +321,20 @@ var require_common = __commonJS({
       createDebug.enable(createDebug.load());
       return createDebug;
     }
-    module2.exports = setup;
+    module.exports = setup;
   }
 });
 
 // node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/browser.js
 var require_browser = __commonJS({
-  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/browser.js"(exports2, module2) {
+  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/browser.js"(exports, module) {
     "use strict";
-    exports2.formatArgs = formatArgs;
-    exports2.save = save;
-    exports2.load = load;
-    exports2.useColors = useColors;
-    exports2.storage = localstorage();
-    exports2.destroy = /* @__PURE__ */ (() => {
+    exports.formatArgs = formatArgs;
+    exports.save = save;
+    exports.load = load;
+    exports.useColors = useColors;
+    exports.storage = localstorage();
+    exports.destroy = /* @__PURE__ */ (() => {
       let warned = false;
       return () => {
         if (!warned) {
@@ -338,7 +343,7 @@ var require_browser = __commonJS({
         }
       };
     })();
-    exports2.colors = [
+    exports.colors = [
       "#0000CC",
       "#0000FF",
       "#0033CC",
@@ -431,7 +436,7 @@ var require_browser = __commonJS({
       typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
     }
     function formatArgs(args) {
-      args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module2.exports.humanize(this.diff);
+      args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module.exports.humanize(this.diff);
       if (!this.useColors) {
         return;
       }
@@ -450,14 +455,14 @@ var require_browser = __commonJS({
       });
       args.splice(lastC, 0, c);
     }
-    exports2.log = console.debug || console.log || (() => {
+    exports.log = console.debug || console.log || (() => {
     });
     function save(namespaces) {
       try {
         if (namespaces) {
-          exports2.storage.setItem("debug", namespaces);
+          exports.storage.setItem("debug", namespaces);
         } else {
-          exports2.storage.removeItem("debug");
+          exports.storage.removeItem("debug");
         }
       } catch (error) {
       }
@@ -465,7 +470,7 @@ var require_browser = __commonJS({
     function load() {
       let r;
       try {
-        r = exports2.storage.getItem("debug") || exports2.storage.getItem("DEBUG");
+        r = exports.storage.getItem("debug") || exports.storage.getItem("DEBUG");
       } catch (error) {
       }
       if (!r && typeof process !== "undefined" && "env" in process) {
@@ -479,8 +484,8 @@ var require_browser = __commonJS({
       } catch (error) {
       }
     }
-    module2.exports = require_common()(exports2);
-    var { formatters } = module2.exports;
+    module.exports = require_common()(exports);
+    var { formatters } = module.exports;
     formatters.j = function(v) {
       try {
         return JSON.stringify(v);
@@ -493,26 +498,26 @@ var require_browser = __commonJS({
 
 // node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/node.js
 var require_node = __commonJS({
-  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/node.js"(exports2, module2) {
+  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/node.js"(exports, module) {
     "use strict";
-    var tty = require("tty");
-    var util = require("util");
-    exports2.init = init;
-    exports2.log = log;
-    exports2.formatArgs = formatArgs;
-    exports2.save = save;
-    exports2.load = load;
-    exports2.useColors = useColors;
-    exports2.destroy = util.deprecate(
+    var tty = __require("tty");
+    var util = __require("util");
+    exports.init = init;
+    exports.log = log;
+    exports.formatArgs = formatArgs;
+    exports.save = save;
+    exports.load = load;
+    exports.useColors = useColors;
+    exports.destroy = util.deprecate(
       () => {
       },
       "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`."
     );
-    exports2.colors = [6, 2, 3, 4, 5, 1];
+    exports.colors = [6, 2, 3, 4, 5, 1];
     try {
-      const supportsColor = require("supports-color");
+      const supportsColor = __require("supports-color");
       if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
-        exports2.colors = [
+        exports.colors = [
           20,
           21,
           26,
@@ -593,7 +598,7 @@ var require_node = __commonJS({
       }
     } catch (error) {
     }
-    exports2.inspectOpts = Object.keys(process.env).filter((key) => {
+    exports.inspectOpts = Object.keys(process.env).filter((key) => {
       return /^debug_/i.test(key);
     }).reduce((obj, key) => {
       const prop = key.substring(6).toLowerCase().replace(/_([a-z])/g, (_, k) => {
@@ -613,7 +618,7 @@ var require_node = __commonJS({
       return obj;
     }, {});
     function useColors() {
-      return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : tty.isatty(process.stderr.fd);
+      return "colors" in exports.inspectOpts ? Boolean(exports.inspectOpts.colors) : tty.isatty(process.stderr.fd);
     }
     function formatArgs(args) {
       const { namespace: name, useColors: useColors2 } = this;
@@ -622,19 +627,19 @@ var require_node = __commonJS({
         const colorCode = "\x1B[3" + (c < 8 ? c : "8;5;" + c);
         const prefix = `  ${colorCode};1m${name} \x1B[0m`;
         args[0] = prefix + args[0].split("\n").join("\n" + prefix);
-        args.push(colorCode + "m+" + module2.exports.humanize(this.diff) + "\x1B[0m");
+        args.push(colorCode + "m+" + module.exports.humanize(this.diff) + "\x1B[0m");
       } else {
         args[0] = getDate() + name + " " + args[0];
       }
     }
     function getDate() {
-      if (exports2.inspectOpts.hideDate) {
+      if (exports.inspectOpts.hideDate) {
         return "";
       }
       return (/* @__PURE__ */ new Date()).toISOString() + " ";
     }
     function log(...args) {
-      return process.stderr.write(util.formatWithOptions(exports2.inspectOpts, ...args) + "\n");
+      return process.stderr.write(util.formatWithOptions(exports.inspectOpts, ...args) + "\n");
     }
     function save(namespaces) {
       if (namespaces) {
@@ -648,13 +653,13 @@ var require_node = __commonJS({
     }
     function init(debug) {
       debug.inspectOpts = {};
-      const keys = Object.keys(exports2.inspectOpts);
+      const keys = Object.keys(exports.inspectOpts);
       for (let i = 0; i < keys.length; i++) {
-        debug.inspectOpts[keys[i]] = exports2.inspectOpts[keys[i]];
+        debug.inspectOpts[keys[i]] = exports.inspectOpts[keys[i]];
       }
     }
-    module2.exports = require_common()(exports2);
-    var { formatters } = module2.exports;
+    module.exports = require_common()(exports);
+    var { formatters } = module.exports;
     formatters.o = function(v) {
       this.inspectOpts.colors = this.useColors;
       return util.inspect(v, this.inspectOpts).split("\n").map((str) => str.trim()).join(" ");
@@ -668,21 +673,21 @@ var require_node = __commonJS({
 
 // node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/index.js
 var require_src = __commonJS({
-  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/index.js"(exports2, module2) {
+  "node_modules/.pnpm/debug@4.4.1/node_modules/debug/src/index.js"(exports, module) {
     "use strict";
     if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
-      module2.exports = require_browser();
+      module.exports = require_browser();
     } else {
-      module2.exports = require_node();
+      module.exports = require_node();
     }
   }
 });
 
 // node_modules/.pnpm/koa-compose@4.1.0/node_modules/koa-compose/index.js
 var require_koa_compose = __commonJS({
-  "node_modules/.pnpm/koa-compose@4.1.0/node_modules/koa-compose/index.js"(exports2, module2) {
+  "node_modules/.pnpm/koa-compose@4.1.0/node_modules/koa-compose/index.js"(exports, module) {
     "use strict";
-    module2.exports = compose;
+    module.exports = compose;
     function compose(middleware) {
       if (!Array.isArray(middleware)) throw new TypeError("Middleware stack must be an array!");
       for (const fn of middleware) {
@@ -710,10 +715,10 @@ var require_koa_compose = __commonJS({
 
 // node_modules/.pnpm/depd@2.0.0/node_modules/depd/index.js
 var require_depd = __commonJS({
-  "node_modules/.pnpm/depd@2.0.0/node_modules/depd/index.js"(exports2, module2) {
+  "node_modules/.pnpm/depd@2.0.0/node_modules/depd/index.js"(exports, module) {
     "use strict";
-    var relative = require("path").relative;
-    module2.exports = depd;
+    var relative = __require("path").relative;
+    module.exports = depd;
     var basePath = process.cwd();
     function containsNamespace(str, namespace) {
       var vals = str.split(/[ ,]+/);
@@ -1017,9 +1022,9 @@ var require_depd = __commonJS({
 
 // node_modules/.pnpm/setprototypeof@1.2.0/node_modules/setprototypeof/index.js
 var require_setprototypeof = __commonJS({
-  "node_modules/.pnpm/setprototypeof@1.2.0/node_modules/setprototypeof/index.js"(exports2, module2) {
+  "node_modules/.pnpm/setprototypeof@1.2.0/node_modules/setprototypeof/index.js"(exports, module) {
     "use strict";
-    module2.exports = Object.setPrototypeOf || ({ __proto__: [] } instanceof Array ? setProtoOf : mixinProperties);
+    module.exports = Object.setPrototypeOf || ({ __proto__: [] } instanceof Array ? setProtoOf : mixinProperties);
     function setProtoOf(obj, proto) {
       obj.__proto__ = proto;
       return obj;
@@ -1037,8 +1042,8 @@ var require_setprototypeof = __commonJS({
 
 // node_modules/.pnpm/statuses@2.0.1/node_modules/statuses/codes.json
 var require_codes = __commonJS({
-  "node_modules/.pnpm/statuses@2.0.1/node_modules/statuses/codes.json"(exports2, module2) {
-    module2.exports = {
+  "node_modules/.pnpm/statuses@2.0.1/node_modules/statuses/codes.json"(exports, module) {
+    module.exports = {
       "100": "Continue",
       "101": "Switching Protocols",
       "102": "Processing",
@@ -1108,10 +1113,10 @@ var require_codes = __commonJS({
 
 // node_modules/.pnpm/statuses@2.0.1/node_modules/statuses/index.js
 var require_statuses = __commonJS({
-  "node_modules/.pnpm/statuses@2.0.1/node_modules/statuses/index.js"(exports2, module2) {
+  "node_modules/.pnpm/statuses@2.0.1/node_modules/statuses/index.js"(exports, module) {
     "use strict";
     var codes = require_codes();
-    module2.exports = status;
+    module.exports = status;
     status.message = codes;
     status.code = createMessageToStatusCodeMap(codes);
     status.codes = createStatusCodeList(codes);
@@ -1179,10 +1184,10 @@ var require_statuses = __commonJS({
 
 // node_modules/.pnpm/inherits@2.0.4/node_modules/inherits/inherits_browser.js
 var require_inherits_browser = __commonJS({
-  "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits/inherits_browser.js"(exports2, module2) {
+  "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits/inherits_browser.js"(exports, module) {
     "use strict";
     if (typeof Object.create === "function") {
-      module2.exports = function inherits(ctor, superCtor) {
+      module.exports = function inherits(ctor, superCtor) {
         if (superCtor) {
           ctor.super_ = superCtor;
           ctor.prototype = Object.create(superCtor.prototype, {
@@ -1196,7 +1201,7 @@ var require_inherits_browser = __commonJS({
         }
       };
     } else {
-      module2.exports = function inherits(ctor, superCtor) {
+      module.exports = function inherits(ctor, superCtor) {
         if (superCtor) {
           ctor.super_ = superCtor;
           var TempCtor = function() {
@@ -1212,14 +1217,14 @@ var require_inherits_browser = __commonJS({
 
 // node_modules/.pnpm/inherits@2.0.4/node_modules/inherits/inherits.js
 var require_inherits = __commonJS({
-  "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits/inherits.js"(exports2, module2) {
+  "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits/inherits.js"(exports, module) {
     "use strict";
     try {
-      util = require("util");
+      util = __require("util");
       if (typeof util.inherits !== "function") throw "";
-      module2.exports = util.inherits;
+      module.exports = util.inherits;
     } catch (e) {
-      module2.exports = require_inherits_browser();
+      module.exports = require_inherits_browser();
     }
     var util;
   }
@@ -1227,9 +1232,9 @@ var require_inherits = __commonJS({
 
 // node_modules/.pnpm/toidentifier@1.0.1/node_modules/toidentifier/index.js
 var require_toidentifier = __commonJS({
-  "node_modules/.pnpm/toidentifier@1.0.1/node_modules/toidentifier/index.js"(exports2, module2) {
+  "node_modules/.pnpm/toidentifier@1.0.1/node_modules/toidentifier/index.js"(exports, module) {
     "use strict";
-    module2.exports = toIdentifier;
+    module.exports = toIdentifier;
     function toIdentifier(str) {
       return str.split(" ").map(function(token) {
         return token.slice(0, 1).toUpperCase() + token.slice(1);
@@ -1240,17 +1245,17 @@ var require_toidentifier = __commonJS({
 
 // node_modules/.pnpm/http-errors@2.0.0/node_modules/http-errors/index.js
 var require_http_errors = __commonJS({
-  "node_modules/.pnpm/http-errors@2.0.0/node_modules/http-errors/index.js"(exports2, module2) {
+  "node_modules/.pnpm/http-errors@2.0.0/node_modules/http-errors/index.js"(exports, module) {
     "use strict";
     var deprecate = require_depd()("http-errors");
     var setPrototypeOf = require_setprototypeof();
     var statuses = require_statuses();
     var inherits = require_inherits();
     var toIdentifier = require_toidentifier();
-    module2.exports = createError;
-    module2.exports.HttpError = createHttpErrorConstructor();
-    module2.exports.isHttpError = createIsHttpErrorFunction(module2.exports.HttpError);
-    populateConstructorExports(module2.exports, statuses.codes, module2.exports.HttpError);
+    module.exports = createError;
+    module.exports.HttpError = createHttpErrorConstructor();
+    module.exports.isHttpError = createIsHttpErrorFunction(module.exports.HttpError);
+    populateConstructorExports(module.exports, statuses.codes, module.exports.HttpError);
     function codeClass(status) {
       return Number(String(status).charAt(0) + "00");
     }
@@ -1378,7 +1383,7 @@ var require_http_errors = __commonJS({
         Object.defineProperty(func, "name", desc);
       }
     }
-    function populateConstructorExports(exports3, codes, HttpError) {
+    function populateConstructorExports(exports2, codes, HttpError) {
       codes.forEach(function forEachCode(code) {
         var CodeError;
         var name = toIdentifier(statuses.message[code]);
@@ -1391,8 +1396,8 @@ var require_http_errors = __commonJS({
             break;
         }
         if (CodeError) {
-          exports3[code] = CodeError;
-          exports3[name] = CodeError;
+          exports2[code] = CodeError;
+          exports2[name] = CodeError;
         }
       });
     }
@@ -1404,15 +1409,15 @@ var require_http_errors = __commonJS({
 
 // node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/dist/index.js"(exports2) {
+  "node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/dist/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.TokenData = void 0;
-    exports2.parse = parse;
-    exports2.compile = compile;
-    exports2.match = match;
-    exports2.pathToRegexp = pathToRegexp;
-    exports2.stringify = stringify;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.TokenData = void 0;
+    exports.parse = parse;
+    exports.compile = compile;
+    exports.match = match;
+    exports.pathToRegexp = pathToRegexp;
+    exports.stringify = stringify;
     var DEFAULT_DELIMITER = "/";
     var NOOP_VALUE = (value) => value;
     var ID_START = /^[$_\p{ID_Start}]$/u;
@@ -1528,7 +1533,7 @@ var require_dist = __commonJS({
         this.tokens = tokens;
       }
     };
-    exports2.TokenData = TokenData;
+    exports.TokenData = TokenData;
     function parse(str, options = {}) {
       const { encodePath = NOOP_VALUE } = options;
       const it = new Iter(lexer(str));
@@ -1767,11 +1772,11 @@ var require_dist = __commonJS({
 
 // node_modules/.pnpm/@koa+router@14.0.0/node_modules/@koa/router/lib/layer.js
 var require_layer = __commonJS({
-  "node_modules/.pnpm/@koa+router@14.0.0/node_modules/@koa/router/lib/layer.js"(exports2, module2) {
+  "node_modules/.pnpm/@koa+router@14.0.0/node_modules/@koa/router/lib/layer.js"(exports, module) {
     "use strict";
-    var { parse: parseUrl, format: formatUrl } = require("url");
+    var { parse: parseUrl, format: formatUrl } = __require("url");
     var { pathToRegexp, compile, parse } = require_dist();
-    module2.exports = class Layer {
+    module.exports = class Layer {
       /**
        * Initialize a new routing Layer with given `method`, `path`, and `middleware`.
        *
@@ -1987,9 +1992,9 @@ var require_layer = __commonJS({
 
 // node_modules/.pnpm/@koa+router@14.0.0/node_modules/@koa/router/lib/router.js
 var require_router = __commonJS({
-  "node_modules/.pnpm/@koa+router@14.0.0/node_modules/@koa/router/lib/router.js"(exports2, module2) {
+  "node_modules/.pnpm/@koa+router@14.0.0/node_modules/@koa/router/lib/router.js"(exports, module) {
     "use strict";
-    var http = require("http");
+    var http = __require("http");
     var debug = require_src()("koa-router");
     var compose = require_koa_compose();
     var HttpError = require_http_errors();
@@ -2561,12 +2566,12 @@ var require_router = __commonJS({
       };
     }
     Router3.prototype.del = Router3.prototype["delete"];
-    module2.exports = Router3;
+    module.exports = Router3;
   }
 });
 
 // src/app.ts
-var import_koa = __toESM(require("koa"), 1);
+import Koa from "koa";
 
 // src/api/index.ts
 var import_router2 = __toESM(require_router(), 1);
@@ -2727,7 +2732,7 @@ router.use("/api/v", video_default.routes()).use(video_default.allowedMethods())
 var api_default = router;
 
 // src/app.ts
-var app = new import_koa.default();
+var app = new Koa();
 app.use(api_default.routes()).use(api_default.allowedMethods());
 var app_default = app;
 
@@ -2768,4 +2773,4 @@ http-errors/index.js:
    * MIT Licensed
    *)
 */
-//# sourceMappingURL=vercel.cjs.map
+//# sourceMappingURL=vercel.js.map
