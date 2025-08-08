@@ -11,6 +11,6 @@ router.get("/ping", (ctx) => {
   ctx.body = { msg: "pong" };
 });
 
-router.use("/v", apiVideo.routes()).use(apiVideo.allowedMethods());
+router.use("/api/v", apiVideo.routes()).use(apiVideo.allowedMethods());
 
 export default router;

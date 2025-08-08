@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "serverless/vercel.ts", // 确保路径正确
+      "src": "dist/vercel/vercel.js", // 确保路径正确
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "serverless/vercel.ts"
+      "src": "/api/(.*)",
+      "dest": "dist/vercel/vercel.js"
     }
   ]
 }
