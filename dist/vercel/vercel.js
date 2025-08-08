@@ -2737,10 +2737,10 @@ app.use(api_default.routes()).use(api_default.allowedMethods());
 var app_default = app;
 
 // serverless/vercel.ts
-var vercel_default = app_default.callback();
-export {
-  vercel_default as default
-};
+var port = process.env.PORT || 4e3;
+app_default.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
 /*! Bundled license information:
 
 depd/index.js:
