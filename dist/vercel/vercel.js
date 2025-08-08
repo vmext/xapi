@@ -2570,6 +2570,9 @@ var require_router = __commonJS({
   }
 });
 
+// serverless/vercel.ts
+import serverless from "serverless-http";
+
 // src/app.ts
 import Koa from "koa";
 
@@ -2737,10 +2740,10 @@ app.use(api_default.routes()).use(api_default.allowedMethods());
 var app_default = app;
 
 // serverless/vercel.ts
-var port = process.env.PORT || 4e3;
-app_default.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+var handler = serverless(app_default);
+export {
+  handler
+};
 /*! Bundled license information:
 
 depd/index.js:
