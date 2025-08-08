@@ -1,9 +1,15 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "serverless/vercel.ts", // 确保路径正确
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/api/vercel.js"
+      "dest": "serverless/vercel.ts"
     }
   ]
 }
