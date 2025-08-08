@@ -1,6 +1,5 @@
 import app from '../src/app'
 import { createServer } from 'http'
-import { ReadableStream } from 'stream/web'
 
 export default {
   async fetch(request: Request): Promise<Response> {
