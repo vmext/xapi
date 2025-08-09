@@ -1,3 +1,5 @@
+import { isDev } from "../util";
+
 export type Media = {
   id: string;
   poster: string;
@@ -5,9 +7,12 @@ export type Media = {
   title: string;
   year: string;
 };
+const moontvDomain = isDev() ? "xtv.gorap.vip" : "moon-tv-sand-five-73.vercel.app"; //xtv.gorap.vip
+
+console.info("env--", process.env.NODE_ENV);
 export async function getMovies(start: number = 0): Promise<Array<Media>> {
   let res = await fetch(
-    `https://xtv.gorap.vip/api/douban/categories?kind=movie&category=热门&type=全部&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=movie&category=热门&type=全部&limit=20&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -27,7 +32,7 @@ export async function getMovies(start: number = 0): Promise<Array<Media>> {
 
 export async function getTVs(start: number = 0): Promise<Array<Media>> {
   let res = await fetch(
-    `https://xtv.gorap.vip/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -48,7 +53,7 @@ export async function getTVs(start: number = 0): Promise<Array<Media>> {
 export async function getShows(start: number = 0): Promise<Array<Media>> {
   start = start || 0;
   let res = await fetch(
-    `https://xtv.gorap.vip/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -84,19 +89,19 @@ type Detail = {
   episodes: Array<any>;
 };
 export async function search(q: string): Promise<Array<Detail>> {
-  let ret: any = await fetch("https://xtv.gorap.vip/api/search?q=" + encodeURIComponent(q));
+  let ret: any = await fetch(`https://${moontvDomain}/api/search?q=${encodeURIComponent(q)}`);
   let data = await ret.json().catch(() => ({ results: [] }));
   let list: Detail[] = [];
   list = data.results
     .filter((item: any) => item.episodes && item.episodes.length > 0)
     .map((item: any) => {
       let episodesx = item.episodes || [];
-      return { 
+      return {
         id: item.id,
         title: item.title,
         poster: item.poster,
         year: item.year,
-        class: item.class,  
+        class: item.class,
         //rate: item.rate,
         typeName: item.type_name,
         doubanId: item.doubanId,

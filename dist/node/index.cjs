@@ -2574,10 +2574,17 @@ var import_router2 = __toESM(require_router(), 1);
 // src/api/video.ts
 var import_router = __toESM(require_router(), 1);
 
+// src/util/index.ts
+function isDev() {
+  return process.env.NODE_ENV === "development";
+}
+
 // src/api/video.mode.ts
+var moontvDomain = isDev() ? "xtv.gorap.vip" : "moon-tv-sand-five-73.vercel.app";
+console.info("env--", process.env.NODE_ENV);
 async function getMovies(start = 0) {
   let res = await fetch(
-    `https://xtv.gorap.vip/api/douban/categories?kind=movie&category=\u70ED\u95E8&type=\u5168\u90E8&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=movie&category=\u70ED\u95E8&type=\u5168\u90E8&limit=20&start=${start}`
   );
   let data = await res.json().catch((err) => ({ code: 500, msg: err.message }));
   let movies = [];
@@ -2596,7 +2603,7 @@ async function getMovies(start = 0) {
 }
 async function getTVs(start = 0) {
   let res = await fetch(
-    `https://xtv.gorap.vip/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
   );
   let data = await res.json().catch((err) => ({ code: 500, msg: err.message }));
   let movies = [];
@@ -2616,7 +2623,7 @@ async function getTVs(start = 0) {
 async function getShows(start = 0) {
   start = start || 0;
   let res = await fetch(
-    `https://xtv.gorap.vip/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
   );
   let data = await res.json().catch((err) => ({ code: 500, msg: err.message }));
   let movies = [];
@@ -2638,7 +2645,7 @@ async function recAnimes() {
   return movies;
 }
 async function search(q) {
-  let ret = await fetch("https://xtv.gorap.vip/api/search?q=" + encodeURIComponent(q));
+  let ret = await fetch(`https://${moontvDomain}/api/search?q=${encodeURIComponent(q)}`);
   let data = await ret.json().catch(() => ({ results: [] }));
   let list = [];
   list = data.results.filter((item) => item.episodes && item.episodes.length > 0).map((item) => {
