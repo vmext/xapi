@@ -37,15 +37,4 @@ configs.push({
   splitting: false,
   clean: true,
 });
-configs.push({
-  // Vercel Serverless 入口
-  entry: ["serverless/cloudflare.ts"],
-  outDir: "dist/cloudflare",
-  format: "esm", // Vercel 推荐 ESM //esm
-  target: "node18",
-  platform: "node",
-  sourcemap: true,
-  splitting: false,
-  clean: true,
-});
 export default defineConfig(configs);
