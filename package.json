@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "@types/koa": "^3.0.0",
     "@vercel/node": "^5.3.11",
     "koa": "^3.0.1",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@koa/router": "^14.0.0",
+    "@types/koa__cors": "^5.0.0",
     "@types/koa__router": "^12.0.4",
     "@types/node": "^24.2.0",
     "cross-env": "^10.0.0",
