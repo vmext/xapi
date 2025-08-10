@@ -10,9 +10,9 @@ export type Media = {
 const moontvDomain = isDev() ? "xtv.gorap.vip" : "moon-tv-sand-five-73.vercel.app"; //xtv.gorap.vip
 
 console.info("env--", process.env.NODE_ENV);
-export async function getMovies(start: number = 0): Promise<Array<Media>> {
+export async function getMovies(start: number = 0, limit: number = 20): Promise<Array<Media>> {
   let res = await fetch(
-    `https://${moontvDomain}/api/douban/categories?kind=movie&category=热门&type=全部&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=movie&category=热门&type=全部&limit=${limit}&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -30,9 +30,9 @@ export async function getMovies(start: number = 0): Promise<Array<Media>> {
   return movies;
 }
 
-export async function getTVs(start: number = 0): Promise<Array<Media>> {
+export async function getTVs(start: number = 0, limit: number = 20): Promise<Array<Media>> {
   let res = await fetch(
-    `https://${moontvDomain}/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=tv&type=tv&limit=${limit}&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];
@@ -50,10 +50,10 @@ export async function getTVs(start: number = 0): Promise<Array<Media>> {
   return movies;
 }
 
-export async function getShows(start: number = 0): Promise<Array<Media>> {
+export async function getShows(start: number = 0, limit: number = 20): Promise<Array<Media>> {
   start = start || 0;
   let res = await fetch(
-    `https://${moontvDomain}/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=show&type=show&limit=${limit}&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let movies: Array<Media> = [];

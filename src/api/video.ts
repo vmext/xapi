@@ -5,16 +5,16 @@ const routerVideo = new Router();
 //首页
 routerVideo.get("/home", async (ctx) => {
   //https://xtv.gorap.vip/api/douban/categories?kind=movie&category=%E7%83%AD%E9%97%A8&type=%E5%85%A8%E9%83%A8&limit=20&start=0
-  let movies: Array<Media> = await getMovies();
-  let tvs: Array<Media> = await getTVs();
-  let shows: Array<Media> = await getShows();
-  let animes: Array<Media> = await recAnimes();
+  let movies: Array<Media> = await getMovies(0, 12);
+  let tvs: Array<Media> = await getTVs(0, 12);
+  let shows: Array<Media> = await getShows(0, 12);
+  //let animes: Array<Media> = await recAnimes();
   let outout: any = {
     code: 200,
     data: {
       movies: movies,
       tvs: tvs,
-      animes: animes,
+      //animes: animes,
       shows: shows,
     },
   };
