@@ -1,5 +1,5 @@
 import Router from "@koa/router";
-import { Media, getMovies, getTVs, getShows, recAnimes, search } from "./video.mode";
+import { Media, getMovies, getTVs, getShows, getAnimes, search } from "./video.mode";
 const routerVideo = new Router();
 
 //首页
@@ -33,6 +33,9 @@ routerVideo.get("/list", async (ctx) => {
     case "show":
       list = await getShows(start);
       break;
+      case "anime":
+        list = await getAnimes(start);
+        break;
     default:
       list = await getTVs(start);
       break;

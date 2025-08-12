@@ -56,10 +56,10 @@ export async function getShows(start: number = 0, limit: number = 20): Promise<A
     `https://${moontvDomain}/api/douban/categories?kind=tv&category=show&type=show&limit=${limit}&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
-  let movies: Array<Media> = [];
+  let list: Array<Media> = [];
   if (data.code == 200 && data.list && data.list.length > 0) {
     data.list.forEach((item: any) => {
-      movies.push({
+      list.push({
         id: item.id,
         poster: item.poster,
         rate: item.rate,
@@ -68,12 +68,28 @@ export async function getShows(start: number = 0, limit: number = 20): Promise<A
       });
     });
   }
-  return movies;
+  return list;
 }
 
-export async function recAnimes(): Promise<Array<Media>> {
-  let movies: Array<Media> = [];
-  return movies;
+export async function getAnimes(start: number = 0, limit: number = 20): Promise<Array<Media>> {
+  start = start || 0;
+  let res = await fetch(
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=anime&type=anime&limit=${limit}&start=${start}`
+  );
+  let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
+  let list: Array<Media> = [];
+  if (data.code == 200 && data.list && data.list.length > 0) {
+    data.list.forEach((item: any) => {
+      list.push({
+        id: item.id,
+        poster: item.poster,
+        rate: item.rate,
+        title: item.title,
+        year: item.year,
+      });
+    });
+  }
+  return list;
 }
 type Detail = {
   id: string;
