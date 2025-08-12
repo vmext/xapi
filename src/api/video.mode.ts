@@ -74,7 +74,7 @@ export async function getShows(start: number = 0, limit: number = 20): Promise<A
 export async function getAnimes(start: number = 0, limit: number = 20): Promise<Array<Media>> {
   start = start || 0;
   let res = await fetch(
-    `https://${moontvDomain}/api/douban/categories?kind=tv&category=anime&type=anime&limit=${limit}&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=热门&type=tv_animation&limit=${limit}&start=${start}`
   );
   let data: any = await res.json().catch((err: Error) => ({ code: 500, msg: err.message }));
   let list: Array<Media> = [];
