@@ -33,9 +33,9 @@ routerVideo.get("/list", async (ctx) => {
     case "show":
       list = await getShows(start);
       break;
-      case "anime":
-        list = await getAnimes(start);
-        break;
+    case "anime":
+      list = await getAnimes(start);
+      break;
     default:
       list = await getTVs(start);
       break;
@@ -47,7 +47,7 @@ routerVideo.get("/list", async (ctx) => {
 });
 routerVideo.get("/s", async (ctx) => {
   let q = (ctx.query.q || "") as string;
-  console.info("search", q); 
+  console.info("search", q);
   let list = await search(q);
   ctx.body = {
     code: 200,
