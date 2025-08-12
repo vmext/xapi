@@ -2582,9 +2582,9 @@ function isDev() {
 // src/api/video.mode.ts
 var moontvDomain = isDev() ? "xtv.gorap.vip" : "moon-tv-sand-five-73.vercel.app";
 console.info("env--", process.env.NODE_ENV);
-async function getMovies(start = 0) {
+async function getMovies(start = 0, limit = 20) {
   let res = await fetch(
-    `https://${moontvDomain}/api/douban/categories?kind=movie&category=\u70ED\u95E8&type=\u5168\u90E8&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=movie&category=\u70ED\u95E8&type=\u5168\u90E8&limit=${limit}&start=${start}`
   );
   let data = await res.json().catch((err) => ({ code: 500, msg: err.message }));
   let movies = [];
@@ -2601,9 +2601,9 @@ async function getMovies(start = 0) {
   }
   return movies;
 }
-async function getTVs(start = 0) {
+async function getTVs(start = 0, limit = 20) {
   let res = await fetch(
-    `https://${moontvDomain}/api/douban/categories?kind=tv&category=tv&type=tv&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=tv&type=tv&limit=${limit}&start=${start}`
   );
   let data = await res.json().catch((err) => ({ code: 500, msg: err.message }));
   let movies = [];
@@ -2620,16 +2620,16 @@ async function getTVs(start = 0) {
   }
   return movies;
 }
-async function getShows(start = 0) {
+async function getShows(start = 0, limit = 20) {
   start = start || 0;
   let res = await fetch(
-    `https://${moontvDomain}/api/douban/categories?kind=tv&category=show&type=show&limit=20&start=${start}`
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=show&type=show&limit=${limit}&start=${start}`
   );
   let data = await res.json().catch((err) => ({ code: 500, msg: err.message }));
-  let movies = [];
+  let list = [];
   if (data.code == 200 && data.list && data.list.length > 0) {
     data.list.forEach((item) => {
-      movies.push({
+      list.push({
         id: item.id,
         poster: item.poster,
         rate: item.rate,
@@ -2638,11 +2638,27 @@ async function getShows(start = 0) {
       });
     });
   }
-  return movies;
+  return list;
 }
-async function recAnimes() {
-  let movies = [];
-  return movies;
+async function getAnimes(start = 0, limit = 20) {
+  start = start || 0;
+  let res = await fetch(
+    `https://${moontvDomain}/api/douban/categories?kind=tv&category=${encodeURIComponent("\u70ED\u95E8")}&type=tv_animation&limit=${limit}&start=${start}`
+  );
+  let data = await res.json().catch((err) => ({ code: 500, msg: err.message }));
+  let list = [];
+  if (data.code == 200 && data.list && data.list.length > 0) {
+    data.list.forEach((item) => {
+      list.push({
+        id: item.id,
+        poster: item.poster,
+        rate: item.rate,
+        title: item.title,
+        year: item.year
+      });
+    });
+  }
+  return list;
 }
 async function search(q) {
   let ret = await fetch(`https://${moontvDomain}/api/search?q=${encodeURIComponent(q)}`);
@@ -2655,9 +2671,9 @@ async function search(q) {
       title: item.title,
       poster: item.poster,
       year: item.year,
-      class: item.class,
+      cata: item.class,
       //rate: item.rate,
-      typeName: item.type_name,
+      type: item.type_name,
       doubanId: item.doubanId,
       source: item.source,
       sourceName: item.source_name,
@@ -2671,16 +2687,15 @@ async function search(q) {
 // src/api/video.ts
 var routerVideo = new import_router.default();
 routerVideo.get("/home", async (ctx) => {
-  let movies = await getMovies();
-  let tvs = await getTVs();
-  let shows = await getShows();
-  let animes = await recAnimes();
+  let movies = await getMovies(0, 12);
+  let tvs = await getTVs(0, 12);
+  let shows = await getShows(0, 12);
   let outout = {
     code: 200,
     data: {
       movies,
       tvs,
-      animes,
+      //animes: animes,
       shows
     }
   };
@@ -2697,6 +2712,9 @@ routerVideo.get("/list", async (ctx) => {
       break;
     case "show":
       list = await getShows(start);
+      break;
+    case "anime":
+      list = await getAnimes(start);
       break;
     default:
       list = await getTVs(start);
@@ -2734,7 +2752,16 @@ router.use("/api/v", video_default.routes()).use(video_default.allowedMethods())
 var api_default = router;
 
 // src/app.ts
+var import_cors = __toESM(require("@koa/cors"), 1);
 var app = new import_koa.default();
+app.use(
+  (0, import_cors.default)({
+    origin: "*",
+    // 允许所有域名跨域请求，如果你只想允许某几个域名，请写对应的域名字符串或者函数
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization", "Accept"]
+  })
+);
 app.use(api_default.routes()).use(api_default.allowedMethods());
 var app_default = app;
 
